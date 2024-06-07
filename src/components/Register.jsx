@@ -1,9 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import * as Yup from 'yup'
 
+import { Button, HelperText, TextInput } from 'react-native-paper'
 import RegistrationSchema from '../validations/register.schema'
 import { registerApi } from '../api/users'
-
+import { useFormik } from 'formik'
+import {formStyles} from '../styles/index'
 
 const Register = (props) => {
 
@@ -19,9 +22,27 @@ const Register = (props) => {
     }
 
 
+    function RegistrationSchema(){
+      return{
+        username: Yup.string().
+          required('Se requiere un nombre').
+          min(2, 'El nombre es muy corto').
+          max(50, 'El nombre es muy largo'),
+        email: Yup.string().
+          email('Correo no valido').
+          required('Se requiere un correo'),
+        password: Yup.string().
+          required('Se requiere una contraseña'),
+        repeatPassword: Yup.string().
+          required('Se requiere confirmar la contraseña').
+          oneOf([Yup.ref('password')], 'Las contraseñas no coinciden')
+      }
+    }
+
+
     const formik = useFormik({
         initialValues: initialValues(),
-        validationSchema: Yup.object(RegistrationSchema),
+        validationSchema: Yup.object(RegistrationSchema()),
         onSubmit: async (values) => {
             console.log('Formulario enviado')
             console.log(values)
