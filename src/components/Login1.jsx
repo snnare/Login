@@ -22,7 +22,7 @@ const Login1 = (props) => {
         initialValues: initialValues(),
         validationSchema: Yup.object(LoginSchema()),
         onSubmit: (values) => {
-            console.log('Formulario enviado')
+            console.log('Todo facherito')
             console.log(values)
         }
     })
@@ -50,7 +50,7 @@ const Login1 = (props) => {
 
       <View>
         <TextInput
-          label = 'Contraseña'
+          label = 'Password'
           mode='outlined'
           secureTextEntry = {true}
           onChangeText={(text) => formik.setFieldValue('password', text)}
@@ -68,7 +68,7 @@ const Login1 = (props) => {
           labelStyle = {formStyles.btnTextLabel}
           onPress={() => console.log('Iniciar sesion')}
           >
-          Iniciar sesion
+          Login
         </Button>
         <Button
           mode='elevated'
@@ -76,13 +76,7 @@ const Login1 = (props) => {
           labelStyle = {formStyles.btnTextLabel}
           onPress={changeForm}
           >
-          Registrarse
-        </Button>
-        <Button
-          mode='text'
-          onPress={() => console.log('Contraseña olvidada')}
-          >
-          ¿Olvidaste la contraseña?
+          Register
         </Button>
     </View>
     )

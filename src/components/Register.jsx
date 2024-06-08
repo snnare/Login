@@ -21,37 +21,38 @@ const Register = (props) => {
         }
     }
 
-
-    function RegistrationSchema(){
-      return{
-        username: Yup.string().
-          required('Se requiere un nombre').
-          min(2, 'El nombre es muy corto').
-          max(50, 'El nombre es muy largo'),
-        email: Yup.string().
-          email('Correo no valido').
-          required('Se requiere un correo'),
-        password: Yup.string().
-          required('Se requiere una contraseña'),
-        repeatPassword: Yup.string().
-          required('Se requiere confirmar la contraseña').
-          oneOf([Yup.ref('password')], 'Las contraseñas no coinciden')
-      }
+    // Registrado
+    function RegistrationSchema() {
+      return {
+        username: Yup.string()
+          .required('El nombre es obligatorio')
+          .min(2, 'El nombre es demasiado corto')
+          .max(50, 'El nombre es demasiado largo'),
+        email: Yup.string()
+          .email('El correo electrónico no es válido')
+          .required('El correo electrónico es obligatorio'),
+        password: Yup.string()
+          .required('La contraseña es obligatoria'),
+        repeatPassword: Yup.string()
+          .required('Por favor, confirma tu contraseña')
+          .oneOf([Yup.ref('password')], 'Las contraseñas no coinciden')
+      };
     }
+    
 
 
     const formik = useFormik({
         initialValues: initialValues(),
         validationSchema: Yup.object(RegistrationSchema()),
         onSubmit: async (values) => {
-            console.log('Formulario enviado')
+            console.log('Registro OK')
             console.log(values)
             try {
                 const result = await registerApi(values);
                 console.log('Usuario registrado', result);
                 changeForm();
             } catch (error) {
-                console.log('Algo anda mal', error);
+                console.log('Ya valio mi pana:(', error);
             }
         }
     })
@@ -129,7 +130,7 @@ const Register = (props) => {
             labelStyle = {formStyles.btnTextLabel}
       onPress={formik.handleSubmit}
             >
-            Registrarse
+            Register
           </Button>
           <Button
             mode='elevated'
@@ -137,7 +138,7 @@ const Register = (props) => {
             labelStyle = {formStyles.btnTextLabel}
             onPress={changeForm}
             >
-            Iniciar sesion
+            LogIn
           </Button>
       </View>
     )

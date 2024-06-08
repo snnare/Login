@@ -29,24 +29,23 @@ export default function Product({
             <RN.View style={styles.productContainer}>
                 <RN.View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                     <RN.Text style={styles.emoji}>{emoji}</RN.Text>
-                    <AntDesign onPress={onDelete} name="delete" size={24} color="gray" />
+                    <AntDesign onPress={onDelete} name="delete" size={24} color="red" />
                 </RN.View>
                 <RN.Text style={styles.name}>{name}</RN.Text>
                 <RN.Text style={styles.price}>${price}</RN.Text>
                 {isSold ? (
                     <RN.TouchableOpacity 
-                    style={[styles.button, {backgroundColor: 'gray'}]}>
-                    <RN.Text style={styles.buttonText}>Vendido</RN.Text>
+                    style={styles.completebutton}>
+                    <RN.Text style={styles.buttonText}>Completado</RN.Text>
                 </RN.TouchableOpacity>
                 )
                 : (
                     <RN.TouchableOpacity 
                     onPress={onEdit}
                     style={styles.button}>
-                    <RN.Text style={styles.buttonText}>Comprar</RN.Text>
+                    <RN.Text style={styles.completebutton}>Completar Tarea</RN.Text>
                     </RN.TouchableOpacity>
-                )}
-                
+                )}                
             </RN.View>
         </RN.View>
     )
@@ -55,12 +54,13 @@ export default function Product({
 const styles = RN.StyleSheet.create({
     productContainer: {
         padding: 16,
-        backgroundColor: '#393d42',
+        backgroundColor: '#fafafa',
         margin: 16,
         borderRadius: 8,
     },
     emoji: {
         fontSize: 100,
+        alignItems: 'center'
     },
     name: {
         fontSize: 32,
@@ -72,15 +72,24 @@ const styles = RN.StyleSheet.create({
         color: 'white',
     },
     button: {
-        backgroundColor: '#1f2124',
+        backgroundColor: '#651FFF',
         padding: 10,
         marginVertical: 6,
         borderRadius: 8,
         alignItems: 'center',
    },
     buttonText: {
-        fontSize: 24,
+        fontSize: 14,
         fontWeight: 'bold',
         color: '#fff',
     },
+    completebutton: {
+        backgroundColor: '#2d913a',
+        padding: 10,
+        marginVertical: 6,
+        borderRadius: 8,
+        alignItems: 'center',
+        color:''
+    }
+
 });

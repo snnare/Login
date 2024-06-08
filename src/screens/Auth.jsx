@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 import {layoutStyle} from '../styles/index'
 import Register from '../components/Register'
 import LoginForm from '../components/LoginForm';
-import logo from '../../assets/michi.jpeg'
+//import logo from '../../assets/michi.jpeg'
+import logo from '../../assets/mainIcon.png'
 
 
 function Auth() {
